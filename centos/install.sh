@@ -1,10 +1,14 @@
 #! /bin/bash
 cp -r /code/recce7 /install/
-cd /install/recce7/honeypot/src/
+cd /install/recce7/
 python3 setup.py bdist_rpm
 cd dist/
 rpm -i recce7-1.0-1.noarch.rpm
-touch /install/recce7.log
-startHoneyPot.sh
-#>> /install/recce7.log
 
+cat /etc/recce7/configs/plugins.cfg
+echo $RECCE7_PATH
+echo test
+cd $RECCE7_PATH
+/usr/local/bin/authbind python3 -m framework.frmwork
+#> /var/log/recce7/honypot.log
+python3 -m reportserver.server.main.py
