@@ -9,6 +9,4 @@ cat /etc/recce7/configs/plugins.cfg
 echo $RECCE7_PATH
 echo test
 cd $RECCE7_PATH
-/usr/local/bin/authbind python3 -m framework.frmwork
-#> /var/log/recce7/honypot.log
-python3 -m reportserver.server.main.py
+/usr/local/bin/authbind python3 -m framework.frmwork && python3 -m reportserver.server.main.py
