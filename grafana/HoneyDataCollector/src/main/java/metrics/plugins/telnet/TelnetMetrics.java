@@ -44,27 +44,44 @@ public class TelnetMetrics implements GraphiteMetrics {
 
 //    private
 
+    private TelnetMetric [] createTelnetMetrics (JSONArray jsonData) {
+        TelnetMetric [] telnetData = new TelnetMetric[jsonData.size()];
+
+        for (int i = 0; i < jsonData.size(); i++) {
+            JSONObject telnetObject = (JSONObject)jsonData.get(i);
+            String durationTimeCode = (String)telnetObject.get("duration");
+            JSONArray sessionItems = (JSONArray)telnetObject.get("session_items");
+            for (Object sessionItem : sessionItems) {
+
+            }
+
+        }
+        return telnetData;
+    }
+
     private String telnet() {
         String result = ReportRequest.requestByPort(this.pluginPort);
-        Map<String, Map<String, Integer>> propertyCounts = RequestParser.parse(result, TELNET_SESSION_ITEM_FIELDS);
-        if (propertyCounts != null) {
-            for (String property : propertyCounts.keySet()) {
-                ArrayList<String> messages = new ArrayList<>();
-                Long timestamp = System.currentTimeMillis() / 1000;
-                for (String valueProp : propertyCounts.get(property).keySet()) {
-                    try {
-                        String sentMessage = this.pluginName + "." + property + "." + valueProp.replace(".", "-") + " " + propertyCounts.get(property).get(valueProp) + " " + timestamp + "\n";
-                        System.out.print(sentMessage);
-                        messages.add(sentMessage);
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                        System.out.println(e.getMessage());
-                        e.printStackTrace();
-                    }
-                }
-                CarbonWriter.writeData(messages);
-            }
-        }
+//        Map<String, Map<String, Integer>> propertyCounts = RequestParser.parse(result, TELNET_SESSION_ITEM_FIELDS);
+        JSONArray items = RequestParser.parse(result, TELNET_SESSION_ITEM_FIELDS);
+
+//        if (propertyCounts != null) {
+//            for (String property : propertyCounts.keySet()) {
+//                ArrayList<String> messages = new ArrayList<>();
+//                Long timestamp = System.currentTimeMillis() / 1000;
+//                for (String valueProp : propertyCounts.get(property).keySet()) {
+//                    try {
+//                        String sentMessage = this.pluginName + "." + property + "." + valueProp.replace(".", "-") + " " + propertyCounts.get(property).get(valueProp) + " " + timestamp + "\n";
+//                        System.out.print(sentMessage);
+//                        messages.add(sentMessage);
+//                    } catch (Exception e) {
+//                        // TODO: handle exception
+//                        System.out.println(e.getMessage());
+//                        e.printStackTrace();
+//                    }
+//                }
+//                CarbonWriter.writeData(messages);
+//            }
+//        }
         return null;
     }
 }

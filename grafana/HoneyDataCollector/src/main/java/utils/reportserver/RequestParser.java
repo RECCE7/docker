@@ -66,11 +66,10 @@ public class RequestParser {
         return propertyCountsMap;
     }
 
-    public static Map<String, Map<String, Integer>> parse(String json, List<String> sessionFields) {
+    public static JSONArray parse(String json, List<String> sessionFields) {
         try {
             JSONParser parser = new JSONParser();
             Object resultObject = parser.parse(json);
-
 //            if (resultObject instanceof JSONArray) {
 //                JSONArray array = (JSONArray) resultObject;
 //                for (Object object : array) {
@@ -80,7 +79,7 @@ public class RequestParser {
 //            } else
             if (resultObject instanceof JSONObject) {
 //                JSONArray portItems =
-                return setPropertyCounts(getItems((JSONObject) resultObject), sessionFields);
+                return getItems((JSONObject) resultObject); //setPropertyCounts(getItems((JSONObject) resultObject), sessionFields);
             }
         } catch (ParseException e) {
             //ToDo: Handle exception
@@ -88,4 +87,27 @@ public class RequestParser {
         }
         return null;
     }
+
+//    public static Map<String, Map<String, Integer>> parse(String json, List<String> sessionFields) {
+//        try {
+//            JSONParser parser = new JSONParser();
+//            Object resultObject = parser.parse(json);
+//
+////            if (resultObject instanceof JSONArray) {
+////                JSONArray array = (JSONArray) resultObject;
+////                for (Object object : array) {
+////                    JSONArray portItems = getItems((JSONObject) object);
+////
+////                }
+////            } else
+//            if (resultObject instanceof JSONObject) {
+////                JSONArray portItems =
+//                return setPropertyCounts(getItems((JSONObject) resultObject), sessionFields);
+//            }
+//        } catch (ParseException e) {
+//            //ToDo: Handle exception
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 }
