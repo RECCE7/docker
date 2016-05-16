@@ -14,7 +14,7 @@ import java.util.List;
  * Created by jesse on 4/28/16.
  */
 public class ReportRequest {
-    private final static String REPORT_SERVER_HOST = "pi";
+    private final static String REPORT_SERVER_HOST = "docker";
     private final static int REPORT_SERVER_PORT = 8080;
     private final static String DAYS_TO_REQUEST = "1";
     private final static String REPORT_SERVER_BASE_URL = "/v1/analytics/";

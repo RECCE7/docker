@@ -1,0 +1,8 @@
+#! /bin/bash
+
+CONTAINER_NAME="cent-install"
+if [ $(docker ps -a | grep $CONTAINER_NAME | awk '{print $NF}' | wc -l) -gt 0 ];then
+    docker kill $CONTAINER_NAME
+    docker rm $CONTAINER_NAME
+fi
+docker run -i -d -h recce7 -p 8080:8080 -p 80:80 -p 443:443 -p 23:23 -v $CENTOS_INSTALL_LOC:/build --name $CONTAINER_NAME  local/cent-install

@@ -1,0 +1,7 @@
+#! /bin/bash
+
+cd packager
+./run
+docker rm -f cent-pkg
+cd ../install
+./run
